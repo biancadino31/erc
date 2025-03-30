@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Love - VSCO Style</title>
+    <style>
+        :root {
+            --font-size: 16px;
+            --primary-color: #f5e6c8;
+            --secondary-color: #e2c391;
+            --accent-color: #d4a76a;
+            --text-color: #421c05;
+            --light-text: #fff9f0;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: var(--font-size);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        
+        body.high-contrast {
+            --primary-color: #07256b;
+            --secondary-color: #1c51b4;
+            --accent-color: #031136;
+            --text-color: #ffffff;
+            --light-text: #2f5dad;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-color);
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: var(--text-color);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+        
+        .accessibility-bar {
+            background-color: var(--text-color);
+            color: var(--light-text);
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        
+        .btn-accessibility {
+            background: none;
+            border: 1px solid var(--light-text);
+            color: var(--light-text);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        
+        .btn-accessibility:hover {
+            background-color: var(--light-text);
+            color: var(--text-color);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            aspect-ratio: 1 / 1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .content-section {
+            margin: 50px 0;
+            padding: 30px;
+            background-color: var(--light-text);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            font-weight: 400;
+            font-size: 1.8em;
+            margin-top: 0;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin-top: 50px;
+        }
+        
+        .vsco-filter {
+            filter: brightness(1.05) contrast(0.95) saturate(1.1);
+        }
+        
+        .highlight {
+            background-color: var(--secondary-color);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="accessibility-bar" aria-label="Barra de acessibilidade">
+        <button id="increaseFont" class="btn-accessibility" aria-label="Aumentar tamanho da fonte">A+</button>
+        <button id="decreaseFont" class="btn-accessibility" aria-label="Diminuir tamanho da fonte">A-</button>
+        <button id="highContrast" class="btn-accessibility" aria-label="Alternar alto contraste">Alto Contraste</button>
+    </div>
+    
+    <header role="banner">
+        <div class="container">
+            <h1>Golden Love</h1>
+            <p class="subtitle">A beleza dourada em cada momento</p>
+        </div>
+    </header>
+    
+    <main class="container" role="main">
+        <section class="content-section" aria-labelledby="about-golden">
+            <h2 id="about-golden">Sobre o Golden Retriever</h2>
+            <p>O <span class="highlight">Golden Retriever</span> é uma das raças de cães mais populares e amadas em todo o mundo. Originários da Escócia no século XIX, esses cães foram originalmente criados para recuperar aves aquáticas durante caçadas.</p>
+            <p>Conhecidos por sua <span class="highlight">pelagem dourada</span>, olhos expressivos e sorriso contagiante, os Goldens são cães extremamente inteligentes, leais e cheios de energia. Eles se destacam como ótimos companheiros familiares, cães de terapia e até mesmo como cães de trabalho em resgates e buscas.</p>
+        </section>
+        
+        <section aria-labelledby="gallery-title">
+            <h2 id="gallery-title">Momentos Dourados</h2>
+            <div class="gallery">
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden Retriever filhote">
+                    <img src="ad972672-e072-49f3-8712-70c1900f56ec.jpg" alt="Filhote de Golden Retriever brincando no gramado">
+                    <div class="gallery-caption">
+                        <p>Filhotes dourados cheios de energia</p>
+                    </div>
+                </div>
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden adulto na praia">
+                    <img src="c1 (5).jpeg" alt="Golden Retriever adulto ">
+                    <div class="gallery-caption">
+                        <p>Alegria em cada movimento</p>
+                    </div>
+                </div>
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden idoso">
+                    <img src="c1 (7).jpeg" alt="Golden Retriever idoso com expressão sábia">
+                    <div class="gallery-caption">
+                        <p>Sabedoria e amor nos anos dourados</p>
+                    </div>
+                </div>
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden na água">
+                    <img src="c1 (2).jpeg" alt="Golden Retriever nadando em um lago">
+                    <div class="gallery-caption">
+                       
+                    </div>
+                </div>
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden com família">
+                    <img src="c1 (3).jpeg" alt="Golden Retriever com uma família no parque">
+                    <div class="gallery-caption">
+                        <p>O melhor amigo da família</p>
+                    </div>
+                </div>
+                <div class="gallery-item vsco-filter" role="figure" aria-label="Golden dormindo">
+                    <img src="c1 (4).jpeg" alt="Golden Retriever dormindo tranquilamente">
+                    <div class="gallery-caption">
+                        <p>Momentos de paz e ternura</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section" aria-labelledby="care-tips">
+            <h2 id="care-tips">Cuidados com seu Golden</h2>
+            <p>Para manter seu <span class="highlight">Golden Retriever</span> saudável e feliz, alguns cuidados são essenciais:</p>
+            <ul>
+                <li><strong>Exercício diário:</strong> Goldens são cães ativos que precisam de pelo menos 1-2 horas de exercício por dia.</li>
+                <li><strong>Escovação regular:</strong> Sua pelagem dupla requer escovação 2-3 vezes por semana para evitar nós e manter a saúde da pele.</li>
+                <li><strong>Alimentação balanceada:</strong> Como tendem a ganhar peso, uma dieta equilibrada é crucial.</li>
+                <li><strong>Estimulação mental:</strong> São cães inteligentes que adoram aprender novos truques e brincar com jogos de inteligência.</li>
+                <li><strong>Check-ups veterinários:</strong> Visitas regulares ao veterinário ajudam a prevenir problemas comuns da raça, como displasia de quadril.</li>
+            </ul>
+        </section>
+        
+        <section class="content-section" aria-labelledby="fun-facts">
+            <h2 id="fun-facts">Curiosidades Douradas</h2>
+            <div class="vsco-filter" style="background-color: var(--secondary-color); padding: 20px; border-radius: 8px;">
+                <p>✨ O nariz do Golden Retriever pode ter até <span class="highlight">200 milhões de receptores olfativos</span> (humanos têm cerca de 5 milhões).</p>
+                <p>✨ Eles estão entre as 5 raças mais inteligentes, capazes de aprender mais de <span class="highlight">200 comandos e palavras</span>.</p>
+                <p>✨ A pelagem dourada é à prova d'água, com uma camada externa repelente e uma subcamada isolante.</p>
+                <p>✨ Goldens têm um <span class="highlight">"sorriso" característico</span> que não é apenas fofo, mas também ajuda a evitar que a baba escorra.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer role="contentinfo">
+        <div class="container">
+            <p>© 2025 Golden Love - Todos os direitos reservados</p>
+            <p>Fotos por Unsplash - Site criado com amor por amantes de Golden Retrievers</p>
+            <p style="font-size: 0.8em; margin-top: 20px;">Este site foi desenvolvido com acessibilidade em mente. Se precisar de qualquer adaptação, utilize nossos botões de acessibilidade no topo da página.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Controle de tamanho de fonte
+        const increaseFont = document.getElementById('increaseFont');
+        const decreaseFont = document.getElementById('decreaseFont');
+        const highContrast = document.getElementById('highContrast');
+        const root = document.documentElement;
+        const body = document.body;
+        
+        let currentFontSize = 16;
+        
+        increaseFont.addEventListener('click', () => {
+            currentFontSize += 2;
+            if(currentFontSize > 24) currentFontSize = 24;
+            root.style.setProperty('--font-size', currentFontSize + 'px');
+        });
+        
+        decreaseFont.addEventListener('click', () => {
+            currentFontSize -= 2;
+            if(currentFontSize < 12) currentFontSize = 12;
+            root.style.setProperty('--font-size', currentFontSize + 'px');
+        });
+        
+        // Contraste alto
+        highContrast.addEventListener('click', () => {
+            body.classList.toggle('high-contrast');
+            
+            // Atualiza o texto do botão
+            if(body.classList.contains('high-contrast')) {
+                highContrast.textContent = 'Contraste Normal';
+            } else {
+                highContrast.textContent = 'Alto Contraste';
+            }
+        });
+        
+        // Preferência de redução de movimento
+        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        if (reduceMotionQuery.matches) {
+            const animatedElements = document.querySelectorAll('*');
+            animatedElements.forEach(element => {
+                element.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
